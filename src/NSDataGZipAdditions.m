@@ -82,6 +82,9 @@
             uncompressedData = malloc(have);
             memcpy(uncompressedData, out, have);
             uncompressedLength = have;
+	    if (strm.avail_out == 0) {
+	    	inflateEnd(&strm);
+	    }
          } else {
             unsigned char* resizedUncompressedData = realloc(uncompressedData, uncompressedLength + have);
             if (resizedUncompressedData == NULL) {
